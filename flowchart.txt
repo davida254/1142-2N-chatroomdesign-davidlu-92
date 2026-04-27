@@ -1,0 +1,40 @@
+多人管理聊天室流程圖
+
+[啟動 Server]
+      |
+      v
+[socket() 建立 TCP socket]
+      |
+      v
+[bind() 綁定 Port]
+      |
+      v
+[listen() 等待 Client]
+      |
+      v
+[select() 同時監聽 Server、Client、鍵盤輸入]
+      |
+      +-------------------------+
+      |                         |
+      v                         v
+[新 Client 連線]          [Client 傳訊息或指令]
+      |                         |
+      v                         v
+[accept()]                 [recv()]
+      |                         |
+      v                         v
+[存入 clients[]]       +-------------------------+
+      |                 | 一般訊息 / 管理指令     |
+      v                 +-------------------------+
+[廣播加入訊息]             |             |
+                           v             v
+                     [一般聊天]      [/mute /kick /history]
+                           |             |
+                           v             v
+                    [檢查是否禁言]   [檢查管理員權限]
+                           |             |
+                           v             v
+                    [save_history()] [執行管理動作]
+                           |             |
+                           v             v
+                    [broadcast()]    [通知聊天室]

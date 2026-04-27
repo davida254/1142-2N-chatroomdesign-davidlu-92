@@ -1,0 +1,26 @@
+範例操作流程：
+
+Terminal 1:
+make
+./server 8888
+
+Terminal 2:
+./client 127.0.0.1 8888 David
+/admin 1234
+hello everyone
+/mute Bob 60
+/unmute Bob
+/kick Bob
+
+Terminal 3:
+./client 127.0.0.1 8888 Bob
+hi
+/history
+/snapshot
+
+預期結果：
+1. Server 可看到使用者加入與訊息。
+2. 所有 Client 可同步收到其他人的訊息。
+3. Bob 被 /mute 後，仍可收到聊天室訊息，但不能發言。
+4. /snapshot 會產生 snapshot_YYYYMMDD_HHMMSS.txt。
+5. /kick Bob 會關閉 Bob 的 socket 連線。
